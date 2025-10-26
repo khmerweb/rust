@@ -1,0 +1,5 @@
+rustup doc --book
+cargo new my_project
+cargo update
+cargo check
+cargo run
