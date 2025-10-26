@@ -1,7 +1,13 @@
 {
-  "functions": {
-    "api/handler.rs": {
-      "runtime": "vercel-rust@4.0.9"
-    }
-  }
+    "functions": {
+        "api/**/*.rs": {
+            "runtime": "vercel-rust@4.0.9"
+        }
+    },
+    "routes": [
+        {
+            "src": "/api/handler",
+            "dest": "/api/handler.rs"
+        }
+    ]
 }
