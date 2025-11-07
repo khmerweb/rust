@@ -4,10 +4,9 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-rocket = "0.5.1"
-vercel_runtime = "1.1.6"
+rocket = { version = "0.5.0", features = ["json"] } # Add features you need
 tokio = { version = "1", features = ["macros"] }
-serde_json = "1.0"
+vercel_runtime = "0.1" # Use the appropriate version
 
 [[bin]]
 name = "api"
