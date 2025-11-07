@@ -1764,6 +1764,7 @@ name = "tutorial"
 version = "0.1.0"
 dependencies = [
  "rocket",
+ "serde_json",
  "tokio",
  "vercel_runtime",
 ]

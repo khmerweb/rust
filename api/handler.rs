@@ -1,14 +1,21 @@
-#[macro_use]
-extern crate rocket;
+// api/handler.rs
+use serde_json::json;
+use vercel_runtime::{run, Body, Error, Request, Response, StatusCode};
 
-use rocket::{launch, routes};
-
-#[get("/")]
-fn index() -> &'static str {
-    "Hello from Rocket on Vercel!"
+#[tokio::main]
+async fn main() -> Result<(), Error> {
+    run(handler).await
 }
 
-#[launch]
-fn rocket() -> _ {
-    rocket::build().mount("/api/hello", routes![index])
+pub async fn handler(_req: Request) -> Result<Response<Body>, Error> {
+    Ok(Response::builder()
+        .status(StatusCode::OK)
+        .header("Content-Type", "application/json")
+        .body(
+            json!({
+                "message": "Hello from Rust on Vercel!"
+            })
+            .to_string()
+            .into(),
+        )?)
 }
