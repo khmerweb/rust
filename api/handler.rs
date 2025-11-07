@@ -13,7 +13,7 @@ async fn main() -> Result<(), Error> {
     run(handler).await
 }
 
-pub async fn handler(_req: Request) -> Result<Response<Body>, Error> {
+pub async fn handler(event: Event) -> Result<Response<Body>, Error> {
     let rocket_app = rocket::build().mount("/", routes![hello]);
     /* 
     Ok(Response::builder()
