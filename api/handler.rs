@@ -1,6 +1,12 @@
 // api/handler.rs
-use serde_json::json;
-use vercel_runtime::{run, Body, Error, Request, Response, StatusCode};
+use rocket::{get, routes, serde::json::Json};
+use vercel_runtime::{Body, Error, Event, Request, Response, run};
+use http::StatusCode;
+
+#[get("/hello")]
+fn hello() -> Json<&'static str> {
+    Json("Hello from Rocket on Vercel!")
+}
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
@@ -8,6 +14,8 @@ async fn main() -> Result<(), Error> {
 }
 
 pub async fn handler(_req: Request) -> Result<Response<Body>, Error> {
+    let rocket_app = rocket::build().mount("/", routes![hello]);
+    /* 
     Ok(Response::builder()
         .status(StatusCode::OK)
         .header("Content-Type", "application/json")
@@ -18,4 +26,5 @@ pub async fn handler(_req: Request) -> Result<Response<Body>, Error> {
             .to_string()
             .into(),
         )?)
+    */
 }
